@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/style/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <input v-model="artistName" type="text"  placeholder="artiste">
+            <button @click="searchArtists()">Rechercher</button>
+            <ul class="artists">
+                <li 
+                    v-for="(artist, a) in artists"
+                    :key="a"
+                    @click="selectArtist(artist)">{{ artist.name }}</li>
+            </ul>
+            <div id="albums" v-if="albums.length > 0">
+                <p>{{ selectedArtist.name }}</p>
+                <img 
+                    v-if="selectedArtist.image"
+                    :src="selectedArtist.image"
+                    :alt="selectedArtist.name"/>
+                <ul>
+                    <li v-for="album in albums">
+                        <album :album-id="album.id"></album>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- utilisation axios pour requêtes ajax -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js"></script>
+        <script src="assets/js/api_calls.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>

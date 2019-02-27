@@ -1,0 +1,14 @@
+body {
+    background-color: #000;
+    color: white;
+}
+
+button, input[type=button] {
+    border: 0px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #1ED760;
+}
