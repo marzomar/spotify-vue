@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="app">
-            <input v-model="artistName" type="text"  placeholder="artiste">
+            <input v-model="artistName" @keyup="searchArtists()" type="text"  placeholder="artiste">
             <button @click="searchArtists()">Rechercher</button>
             <ul class="artists">
                 <li 

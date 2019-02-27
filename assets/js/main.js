@@ -17,6 +17,7 @@ Vue.component('Album', {
     template: `
     <div class="album">
         <p class="album-name">{{ name }}</p>
+        <img v-if="image" :src="image"/>
         <ul class="tracks">
             <li
                 class="track"
@@ -80,11 +81,15 @@ var app = new Vue({
         searchArtists() {
             var self = this;
             this.selectedArtist = null;
-            searchArtist(self.artistName).then((artists) => {
-                self.artists = artists;
-            }).catch((err) => {
-                console.log(err);
-            })
+            if (this.artistName !== '') {
+                searchArtist(self.artistName).then((artists) => {
+                    self.artists = artists;
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } else {
+                this.artists = [];
+            }
         }
     },
 })
