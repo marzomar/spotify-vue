@@ -16,9 +16,11 @@ Vue.component('Track', {
 Vue.component('Album', {
     template: `
     <div class="album">
-        <p class="album-name">{{ name }}</p>
-        <img v-if="image" :src="image"/>
-        <ul class="tracks">
+        <div class="album-cover">
+            <img v-if="image" :src="image"/>
+            <h3 class="album-name">{{ name }}</h3>
+        </div>
+        <ul class="tracks spotify-list">
             <li
                 class="track"
                 v-for="(track, t) in tracks"
@@ -59,6 +61,8 @@ var app = new Vue({
     watch: {
         selectedArtist(newValue) {
             if (newValue !== null) {
+                this.artists = [];
+                this.artistName = newValue.name;
                 var self = this;
                 getAlbums(newValue.id).then((albums) => {
                     self.albums = albums;
@@ -72,6 +76,8 @@ var app = new Vue({
     },
     methods: {
         selectArtist(artist) {
+            // vider les albums avant de changer d'artiste
+            this.albums = [];
             this.selectedArtist = {
                 id: artist.id,
                 name: artist.name,

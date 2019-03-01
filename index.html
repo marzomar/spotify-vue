@@ -9,21 +9,30 @@
     </head>
     <body>
         <div id="app">
-            <input v-model="artistName" @keyup="searchArtists()" type="text"  placeholder="artiste">
-            <button @click="searchArtists()">Rechercher</button>
-            <ul class="artists">
+            <div class="spotify-search">
+                <input v-model="artistName" @keyup="searchArtists()" type="text"  placeholder="Commencer à taper ...">
+                <button @click="searchArtists()">Rechercher</button>
+            </div>
+            <ul class="artists spotify-list">
                 <li 
                     v-for="(artist, a) in artists"
                     :key="a"
-                    @click="selectArtist(artist)">{{ artist.name }}</li>
+                    @click="selectArtist(artist)">
+                    <div class="inline-image">
+                        <img :src="artist.images[0].url" v-if="artist.images[0]">
+                    </div>
+                    <p>{{ artist.name }}</p>
+                </li>
             </ul>
             <div id="albums" v-if="albums.length > 0">
-                <p>{{ selectedArtist.name }}</p>
-                <img 
-                    v-if="selectedArtist.image"
-                    :src="selectedArtist.image"
-                    :alt="selectedArtist.name"/>
-                <ul>
+                <div class="spotify-artist-image">
+                    <h3>{{ selectedArtist.name }}</h3>
+                    <img 
+                        v-if="selectedArtist.image"
+                        :src="selectedArtist.image"
+                        :alt="selectedArtist.name"/>
+                </div>
+                <ul class="albums-list">
                     <li v-for="album in albums">
                         <album :album-id="album.id"></album>
                     </li>
